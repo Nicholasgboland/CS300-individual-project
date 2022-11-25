@@ -1,9 +1,15 @@
 require 'rails_helper'
 
+
 RSpec.feature "Projects", type: :feature do
+
+  user = FactoryBot.build_stubbed(:user)
+
   context "Create new project" do
     before(:each) do
+      Warden.test_mode!
       visit new_project_path
+      login_as(user, :scope => :user)
       within("form") do
         fill_in "Title", with: "Test title"
       end
@@ -24,7 +30,9 @@ RSpec.feature "Projects", type: :feature do
   context "Update project" do
     let(:project) { Project.create(title: "Test title", description: "Test content") }
     before(:each) do
+      Warden.test_mode!
       visit edit_project_path(project)
+      login_as(user, :scope => :user)
     end
 
     scenario "should be successful" do
@@ -47,8 +55,10 @@ RSpec.feature "Projects", type: :feature do
   context "Remove existing project" do
     let!(:project) { Project.create(title: "Test title", description: "Test content") }
     scenario "remove project" do
+      Warden.test_mode!
       visit project_path(project)
       click_button "Destroy this project"
+      login_as(user, :scope => :user)
       expect(page).to have_content("Project was successfully destroyed")
       expect(Project.count).to eq(0)
     end
