@@ -3,7 +3,7 @@ require 'rails_helper'
 
 RSpec.feature "Projects", type: :feature do
 
-  user = FactoryBot.build_stubbed(:user)
+  user = FactoryBot.create(:user)
 
   context "Create new project" do
     before(:each) do
@@ -36,6 +36,7 @@ RSpec.feature "Projects", type: :feature do
     end
 
     scenario "should be successful" do
+      visit edit_project_path(project)
       within("form") do
         fill_in "Description", with: "New description content"
       end
@@ -44,6 +45,9 @@ RSpec.feature "Projects", type: :feature do
     end
 
     scenario "should fail" do
+      Warden.test_mode!
+      login_as(user, :scope => :user)
+      visit edit_project_path(project)
       within("form") do
         fill_in "Description", with: ""
       end
