@@ -8,8 +8,8 @@ RSpec.feature "Projects", type: :feature do
   context "Create new project" do
     before(:each) do
       Warden.test_mode!
-      visit new_project_path
       login_as(user, :scope => :user)
+      visit new_project_path
       within("form") do
         fill_in "Title", with: "Test title"
       end
@@ -31,8 +31,8 @@ RSpec.feature "Projects", type: :feature do
     let(:project) { Project.create(title: "Test title", description: "Test content") }
     before(:each) do
       Warden.test_mode!
-      visit edit_project_path(project)
       login_as(user, :scope => :user)
+      visit edit_project_path(project)
     end
 
     scenario "should be successful" do
@@ -57,8 +57,8 @@ RSpec.feature "Projects", type: :feature do
     scenario "remove project" do
       Warden.test_mode!
       visit project_path(project)
-      click_button "Destroy this project"
       login_as(user, :scope => :user)
+      click_button "Destroy this project"
       expect(page).to have_content("Project was successfully destroyed")
       expect(Project.count).to eq(0)
     end
