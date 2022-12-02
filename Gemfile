@@ -86,3 +86,7 @@ gem 'devise'
 group :development, :test do
   gem 'factory_bot_rails', '~> 6.2.0'
 end
+
+gem 'bootstrap', '~> 5.2.2'
+
+gem 'jquery-rails'

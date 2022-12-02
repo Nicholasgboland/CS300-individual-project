@@ -1,10 +1,22 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @project %>
-
-<div>
-  <%= link_to "Edit this project", edit_project_path(@project) %> |
-  <%= link_to "Back to projects", projects_path %>
-
-  <%= button_to "Destroy this project", @project, method: :delete, 'data-turbo': false %>
-</div>
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light"><%= @project.title %></h1>
+        <p>
+          <%= link_to "Edit this project", edit_project_path(@project), :class => "btn btn-primary my-2" %>
+          <div class="btn-group">
+            <%= link_to "Back to projects", projects_path, :class => "btn btn-sm btn-outline-secondary" %>
+            <%= button_to "Destroy this project", @project, method: :delete, 'data-turbo': false, :class => "btn btn-sm btn-outline-secondary" %>
+          </div>
+        </p>
+      </div>
+    </div>
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h2 class="fw-light">Description</h2>
+        <div class="border border-success">
+          <p class="lead text-muted"><%= @project.description %></p>
+        </div>
+      </div>
+    </div>
+</section>

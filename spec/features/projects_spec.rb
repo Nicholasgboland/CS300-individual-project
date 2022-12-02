@@ -10,7 +10,7 @@ RSpec.feature "Projects", type: :feature do
       Warden.test_mode!
       login_as(user, :scope => :user)
       visit new_project_path
-      within("form") do
+      within(all("form")[1]) do
         fill_in "Title", with: "Test title"
       end
     end
@@ -37,7 +37,7 @@ RSpec.feature "Projects", type: :feature do
 
     scenario "should be successful" do
       visit edit_project_path(project)
-      within("form") do
+      within(all("form")[1]) do
         fill_in "Description", with: "New description content"
       end
       click_button "Update Project"
@@ -48,7 +48,7 @@ RSpec.feature "Projects", type: :feature do
       Warden.test_mode!
       login_as(user, :scope => :user)
       visit edit_project_path(project)
-      within("form") do
+      within(all("form")[1]) do
         fill_in "Description", with: ""
       end
       click_button "Update Project"
