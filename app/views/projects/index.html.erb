@@ -14,22 +14,22 @@
 
   <div class="album py-5 bg-light">
     <div class="container">
-        <div id="projects">
-        <% @projects.in_groups_of(4, false).each do |group| %>
+      <div id="projects">
+        <% @projects.in_groups_of(3, false).each do |group| %>
           <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <% group.each do |project| %>
-            <div class="col">
-              <div class="card card-body shadow-sm">
-                    <%= render project, :class => "card-body d-flex justify-content-between align-items-center" %>
-                    <div class="btn-group">
-                      <%= link_to "Show this project", project, :class => "btn btn-sm btn-outline-secondary" %>
-                    </div>
+            <% group.each do |project| %>
+              <div class="col">
+                <div class="card card-body shadow-sm">
+                  <%= render project, :class => "card-body d-flex justify-content-between align-items-center" %>
+                  <div class="btn-group">
+                    <%= link_to "Show this project", project, :class => "btn btn-sm btn-outline-secondary" %>
+                  </div>
+                </div>
               </div>
-            </div>
-          <% end %>
+            <% end %>
           </div>
         <% end %>
-        </div>
+      </div>
     </div>
   </div>
 
